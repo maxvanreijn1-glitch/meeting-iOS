@@ -6,6 +6,8 @@
 //  Copyright © 2023 GoNative.io LLC. All rights reserved.
 //
 
+import UIKit
+
 extension UIApplication {
     @objc public var currentKeyWindow: UIWindow? {
         return UIApplication.shared.windows.last { $0.isKeyWindow }
