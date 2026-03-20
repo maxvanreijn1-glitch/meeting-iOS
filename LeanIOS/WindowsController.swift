@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import GoNativeCore
 
 @objc class WindowsController: NSObject {

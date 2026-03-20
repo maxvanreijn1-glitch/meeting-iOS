@@ -6,6 +6,7 @@
 //  Copyright © 2026 GoNative.io LLC. All rights reserved.
 //
 
+import UIKit
 import GoNativeCore
 import WebKit
 

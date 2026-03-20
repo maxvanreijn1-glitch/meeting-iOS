@@ -9,14 +9,13 @@
 
 import UIKit
 
-@available(iOS 26.0, *)
+@available(iOS 15.0, *)
 @objc(LEANLiquidTitleView)
 class LiquidTitleView: UIView {
     
     private let label = UILabel()
     private let glassView: UIVisualEffectView = {
-        // Use UIGlassEffect for the iOS 26 "Liquid" look
-        let effect = UIGlassEffect()
+        let effect = UIBlurEffect(style: .systemChromeMaterial)
         return UIVisualEffectView(effect: effect)
     }()
     
