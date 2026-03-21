@@ -83,7 +83,6 @@
 		20FC7FB5199D1C7800A70B08 /* LEANTabManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FC7FB4199D1C7800A70B08 /* LEANTabManager.m */; };
 		35887F952ADCDC31E7699F59 /* Pods_Meetingsmanaged.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9520D3E3D1F02AAE9206796E /* Pods_Meetingsmanaged.framework */; };
 		37011C962BC40AAE00775CA0 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 37011C952BC40AAE00775CA0 /* PrivacyInfo.xcprivacy */; };
-		374399B62C2229E300B2F92D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 374399B42C2229E300B2F92D /* InfoPlist.strings */; };
 		375F612C2F18119A00385AD8 /* LiquidTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375F612B2F18119A00385AD8 /* LiquidTitleView.swift */; };
 		379E3D432A2147C4001C8A01 /* GNSwiftUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379E3D422A2147C4001C8A01 /* GNSwiftUtilities.swift */; };
 		3909A5A92C1C99E7001F68C3 /* MedianEventsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3909A5A82C1C99E7001F68C3 /* MedianEventsManager.m */; };
@@ -252,7 +251,6 @@
 		20FC7FB4199D1C7800A70B08 /* LEANTabManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LEANTabManager.m; sourceTree = "<group>"; };
 		3025020E614B156A4173A26F /* GNBridge.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GNBridge.m; sourceTree = "<group>"; };
 		37011C952BC40AAE00775CA0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		374399B52C2229E300B2F92D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		375F612B2F18119A00385AD8 /* LiquidTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidTitleView.swift; sourceTree = "<group>"; };
 		379E3D422A2147C4001C8A01 /* GNSwiftUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNSwiftUtilities.swift; sourceTree = "<group>"; };
 		3909A5A82C1C99E7001F68C3 /* MedianEventsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MedianEventsManager.m; sourceTree = "<group>"; };
@@ -395,7 +393,6 @@
 				2002B4B618A9991300495B3D /* Images.xcassets */,
 				20AEC8C9234BE20200DBE24D /* Assets.xcassets */,
 				20689023215E9FD900419CB2 /* Localizable.strings */,
-				374399B42C2229E300B2F92D /* InfoPlist.strings */,
 				20A525ED1A7D94EE00936DC5 /* Settings.bundle */,
 				209A964423BAC508001906F1 /* appbeep.wav */,
 				397F6C072AC147B000BD0474 /* LEANHeaders.h */,
@@ -722,7 +719,6 @@
 				BBD972F227AF17C500AD4FC0 /* GoogleService-Info.plist in Resources */,
 				208A9F42191AEBAD0049E664 /* appConfig.json in Resources */,
 				2002B4AF18A9991300495B3D /* Main.storyboard in Resources */,
-				374399B62C2229E300B2F92D /* InfoPlist.strings in Resources */,
 				2004820518B080DD005FDD9A /* SidebarHeaderView.xib in Resources */,
 				2075775621957C1600ADD73A /* LaunchScreen.storyboard in Resources */,
 				BBED1D5F2A4CBE9400180EBF /* customCSS.css in Resources */,
@@ -942,14 +938,6 @@
 				20689024215E9FD900419CB2 /* en */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		374399B42C2229E300B2F92D /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				374399B52C2229E300B2F92D /* en */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
