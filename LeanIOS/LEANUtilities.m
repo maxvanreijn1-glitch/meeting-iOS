@@ -380,7 +380,7 @@
         }
         else if ([self isDeviceiPhone6Plus])
         {
-            if ([UIApplication sharedApplication].isInterfaceOrientationPortrait) {
+            if ([self isPortraitOrientation]) {
                 return @"LaunchImage-800-Portrait-736h@3x.png";
             } else {
                 return @"LaunchImage-800-Landscape-736h@3x.png";
@@ -389,7 +389,7 @@
         else
             return images[0]; //Non-retina iPhone
     }
-    else if ([UIApplication sharedApplication].isInterfaceOrientationPortrait)//iPad Portrait
+    else if ([self isPortraitOrientation])//iPad Portrait
     {
         if ([self isDeviceRetina])
         {
@@ -483,6 +483,20 @@
     return UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPhone &&
     ((size.width == 414 && size.height == 736) ||
      (size.width == 736 && size.height == 414));
+}
+
++(BOOL)isPortraitOrientation
+{
+    UIWindowScene *windowScene = [UIApplication sharedApplication].currentKeyWindow.windowScene;
+    if (windowScene) {
+        UIInterfaceOrientation orientation = windowScene.interfaceOrientation;
+        return UIInterfaceOrientationIsPortrait(orientation);
+    }
+    UIDeviceOrientation deviceOrientation = UIDevice.currentDevice.orientation;
+    if (UIDeviceOrientationIsValidInterfaceOrientation(deviceOrientation)) {
+        return UIDeviceOrientationIsPortrait(deviceOrientation);
+    }
+    return YES;
 }
 
 +(void)injectCss:(NSString *)cssFileName toWebview:(WKWebView *)webview {
