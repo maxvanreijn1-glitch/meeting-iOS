@@ -2,7 +2,6 @@
 platform :ios, '15.5'
 
 source 'https://cdn.cocoapods.org/'
-source 'git@github.com:gonativeio/gonative-specs.git'
 
 require_relative './plugins.rb'
 
@@ -10,9 +9,7 @@ target default_app_target do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for GonativeIO
-  pod 'GoNativeCore'
-  pod 'MedianIcons'
+  # Pods for MedianIOS (GoNativeCore and MedianIcons replaced with local implementations)
   pod 'SSZipArchive', '~> 2.6.0'
   
   use_plugins!

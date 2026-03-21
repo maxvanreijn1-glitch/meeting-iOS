@@ -107,6 +107,8 @@
 		BBED1D612A4CBEB000180EBF /* customJS.js in Resources */ = {isa = PBXBuildFile; fileRef = BBED1D602A4CBEB000180EBF /* customJS.js */; };
 		BBED1D632A4CBEC900180EBF /* iosCustomCSS.css in Resources */ = {isa = PBXBuildFile; fileRef = BBED1D622A4CBEC900180EBF /* iosCustomCSS.css */; };
 		BBED1D652A4CBED900180EBF /* iosCustomJS.js in Resources */ = {isa = PBXBuildFile; fileRef = BBED1D642A4CBED900180EBF /* iosCustomJS.js */; };
+		DF80FE63558EABCFD9C9BF60 /* GoNativeAppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7439BC9D6442FDA0EF2BF338 /* GoNativeAppConfig.m */; };
+		F96E3CE0C8E035E7EB5FC614 /* GNBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 3025020E614B156A4173A26F /* GNBridge.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,6 +135,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		07A3590A4BDE32A51BA2AB32 /* GoNativeAppConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GoNativeAppConfig.h; sourceTree = "<group>"; };
 		0B6D83597DFB31F85DB20AAC /* Pods_MedianIOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MedianIOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2002B49818A9991300495B3D /* Median.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Median.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2002B49B18A9991300495B3D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -247,6 +250,7 @@
 		20F49C2619C7BE9100B46C5A /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		20FC7FB3199D1C7800A70B08 /* LEANTabManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LEANTabManager.h; sourceTree = "<group>"; };
 		20FC7FB4199D1C7800A70B08 /* LEANTabManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LEANTabManager.m; sourceTree = "<group>"; };
+		3025020E614B156A4173A26F /* GNBridge.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GNBridge.m; sourceTree = "<group>"; };
 		37011C952BC40AAE00775CA0 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		374399B52C2229E300B2F92D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		375F612B2F18119A00385AD8 /* LiquidTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiquidTitleView.swift; sourceTree = "<group>"; };
@@ -272,8 +276,10 @@
 		39DE1B482935E67F0001E926 /* GNLogManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GNLogManager.m; sourceTree = "<group>"; };
 		39DE1E4B2C82014300E96CFE /* LEANLoadingSpinnerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LEANLoadingSpinnerManager.h; sourceTree = "<group>"; };
 		39DE1E4C2C82015900E96CFE /* LEANLoadingSpinnerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LEANLoadingSpinnerManager.m; sourceTree = "<group>"; };
+		3EC19E612A381A91E335644E /* GNBridge.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = GNBridge.h; sourceTree = "<group>"; };
 		4C74E9233A1532B38445C85A /* Pods-MedianIOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MedianIOSTests.debug.xcconfig"; path = "Target Support Files/Pods-MedianIOSTests/Pods-MedianIOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		57D5B235C8A27FD058E10E80 /* Pods-Meetingsmanaged.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meetingsmanaged.debug.xcconfig"; path = "Target Support Files/Pods-Meetingsmanaged/Pods-Meetingsmanaged.debug.xcconfig"; sourceTree = "<group>"; };
+		7439BC9D6442FDA0EF2BF338 /* GoNativeAppConfig.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = GoNativeAppConfig.m; sourceTree = "<group>"; };
 		74686CE5E5C79A441C3D2C20 /* Pods-Median.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Median.debug.xcconfig"; path = "Target Support Files/Pods-Median/Pods-Median.debug.xcconfig"; sourceTree = "<group>"; };
 		9520D3E3D1F02AAE9206796E /* Pods_Meetingsmanaged.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Meetingsmanaged.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A05964A6187766539A00F7DF /* Pods-Meetingsmanaged.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Meetingsmanaged.release.xcconfig"; path = "Target Support Files/Pods-Meetingsmanaged/Pods-Meetingsmanaged.release.xcconfig"; sourceTree = "<group>"; };
@@ -475,6 +481,10 @@
 				379E3D422A2147C4001C8A01 /* GNSwiftUtilities.swift */,
 				396F42232A970DF9003FD87E /* UIApplication+Extensions.swift */,
 				37011C952BC40AAE00775CA0 /* PrivacyInfo.xcprivacy */,
+				07A3590A4BDE32A51BA2AB32 /* GoNativeAppConfig.h */,
+				7439BC9D6442FDA0EF2BF338 /* GoNativeAppConfig.m */,
+				3EC19E612A381A91E335644E /* GNBridge.h */,
+				3025020E614B156A4173A26F /* GNBridge.m */,
 			);
 			path = LeanIOS;
 			sourceTree = "<group>";
@@ -878,6 +888,8 @@
 				39C7BFCB2A85E666006AF63C /* LEANLaunchScreenManager.m in Sources */,
 				2002B4F918A99C4100495B3D /* LEANMenuViewController.m in Sources */,
 				39B8E8632858B04A00355B24 /* LEANRegexRulesManager.m in Sources */,
+				DF80FE63558EABCFD9C9BF60 /* GoNativeAppConfig.m in Sources */,
+				F96E3CE0C8E035E7EB5FC614 /* GNBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Reachability.h"
 #import "GNRegistrationManager.h"
-@import GoNativeCore;
+#import "GNBridge.h"
 
 @interface LEANAppDelegate : UIResponder <UIApplicationDelegate>
 

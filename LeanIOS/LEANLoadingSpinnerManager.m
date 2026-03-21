@@ -8,7 +8,6 @@
 
 #import "LEANLoadingSpinnerManager.h"
 #import "LEANAppDelegate.h"
-@import GoNativeCore;
 
 @interface LEANLoadingSpinnerManager()
 @property id<GNController> controller;

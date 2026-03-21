@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import GoNativeCore
 import WebKit
 
 @objc final class WebViewViewportManager: NSObject {
@@ -48,7 +47,7 @@ import WebKit
     }
 
     @objc func setViewport(scale: NSNumber?, width: NSNumber?, webView: WKWebView?) {
-        let appConfig = GoNativeAppConfig.shared()!
+        let appConfig = GoNativeAppConfig.sharedAppConfig()
         
         var scaleContent = ""
         var widthContent = ""

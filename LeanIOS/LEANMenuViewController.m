@@ -15,8 +15,6 @@
 #import "LEANTabManager.h"
 #import "LEANProfilePicker.h"
 #import "LEANUtilities.h"
-#import "GonativeIO-Swift.h"
-@import MedianIcons;
 
 @interface LEANMenuViewController ()
 
@@ -260,11 +258,21 @@
             UIImage *image = [UIImage imageNamed:iconName];
             imageView.image = image;
         } else {
-            // add fontawesome/material/custom icon to imageView
-            icon = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, imageView.bounds.size.width, imageView.bounds.size.height)];
-            icon.textAlignment = NSTextAlignmentCenter;
-            icon.attributedText = [[NSAttributedString alloc] initWithIconName:iconName color:[UIColor colorNamed:@"sidebarTextColor"] size:[UIFont systemFontSize]];
-            [imageView addSubview:icon];
+            // Use LEANIcons to render FontAwesome / Material / custom icons
+            UIImage *iconImage = [LEANIcons imageForIconIdentifier:iconName
+                                                              size:[UIFont systemFontSize]
+                                                             color:[UIColor colorNamed:@"sidebarTextColor"]];
+            if (iconImage) {
+                imageView.image = iconImage;
+            } else {
+                // Fall back to a label displaying the icon name as text
+                icon = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, imageView.bounds.size.width, imageView.bounds.size.height)];
+                icon.textAlignment = NSTextAlignmentCenter;
+                icon.text = iconName;
+                icon.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
+                icon.textColor = [UIColor colorNamed:@"sidebarTextColor"];
+                [imageView addSubview:icon];
+            }
         }
     } else {
         imageView.image = nil;

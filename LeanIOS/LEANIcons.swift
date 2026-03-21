@@ -8,12 +8,17 @@
 
 import Foundation
 import UIKit
-import MedianIcons
 
 @objc class LEANIcons: NSObject {    
     @objc public static let sharedIcons = LEANIcons()
     
     @objc public class func imageForIconIdentifier(_ name: String, size: CGFloat, color: UIColor) -> UIImage? {
-        return UIImage.init(iconName: name, size: size, color: color)
+        // Attempt SF Symbols first (available iOS 13+)
+        if let sfImage = UIImage(systemName: name) {
+            let config = UIImage.SymbolConfiguration(pointSize: size)
+            return sfImage.withConfiguration(config).withTintColor(color, renderingMode: .alwaysOriginal)
+        }
+        // Fall back to named asset in the bundle
+        return UIImage(named: name)?.withTintColor(color, renderingMode: .alwaysOriginal)
     }
 }

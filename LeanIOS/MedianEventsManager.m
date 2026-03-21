@@ -7,7 +7,6 @@
 //
 
 #import "MedianEventsManager.h"
-@import GoNativeCore;
 
 @interface MedianEventsManager()
 @property (weak, nonatomic) LEANWebViewController *wvc;
