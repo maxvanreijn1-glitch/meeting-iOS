@@ -85,7 +85,10 @@
     if ([GoNativeAppConfig sharedAppConfig].useWKWebView) {
         if (!self.wkWebview) {
             WKWebViewConfiguration *config = [[NSClassFromString(@"WKWebViewConfiguration") alloc] init];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
             config.processPool = [LEANUtilities wkProcessPool];
+#pragma clang diagnostic pop
             self.wkWebview = [[NSClassFromString(@"WKWebView") alloc] initWithFrame:CGRectZero configuration:config];
             self.wkWebview.navigationDelegate = self;
         }

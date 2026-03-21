@@ -41,7 +41,7 @@
         return;
     }
     
-    [[[UIApplication sharedApplication] keyWindow] endEditing:YES];
+    [[[UIApplication sharedApplication] currentKeyWindow] endEditing:YES];
     
     if (!visible) {
         self.noInputAccessoryViewClass = self.noInputAccessoryView.class;

@@ -44,7 +44,10 @@
         
         if ([GoNativeAppConfig sharedAppConfig].useWKWebView) {
             WKWebViewConfiguration *config = [[NSClassFromString(@"WKWebViewConfiguration") alloc] init];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
             config.processPool = [LEANUtilities wkProcessPool];
+#pragma clang diagnostic pop
             self.wkWebView = [[NSClassFromString(@"WKWebView") alloc] initWithFrame:CGRectZero configuration:config];
             
             // load url to get around same-origin policy

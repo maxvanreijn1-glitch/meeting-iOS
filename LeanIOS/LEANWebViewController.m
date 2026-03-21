@@ -333,7 +333,10 @@ static NSInteger _currentWindows = 0;
 {
     GoNativeAppConfig *appConfig = [GoNativeAppConfig sharedAppConfig];
     WKWebViewConfiguration *config = [[NSClassFromString(@"WKWebViewConfiguration") alloc] init];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
     config.processPool = [LEANUtilities wkProcessPool];
+#pragma clang diagnostic pop
     config.allowsInlineMediaPlayback = YES;
     
     WKWebView *wv = [[NSClassFromString(@"WKWebView") alloc] initWithFrame:self.wkWebview.frame configuration:config];
