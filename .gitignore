@@ -4,4 +4,6 @@ xcuserdata
 *.xccheckout
 .DS_Store
 Pods/
+Podfile.lock
+*.xcworkspace/xcuserdata
 .idea
