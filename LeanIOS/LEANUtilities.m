@@ -636,6 +636,8 @@
     }
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (WKProcessPool *)wkProcessPool
 {
     static WKProcessPool *processPool;
@@ -649,6 +651,7 @@
         return processPool;
     }
 }
+#pragma clang diagnostic pop
 
 // input can be string or array of strings. Returns an array of NSPredicates.
 +(NSArray<NSPredicate*>*)createRegexArrayFromStrings:(id)input
