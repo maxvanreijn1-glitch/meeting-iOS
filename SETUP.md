@@ -69,7 +69,7 @@ Additional service plugins (e.g. push notifications) are loaded automatically fr
 
 | Requirement | Version |
 |-------------|---------|
-| iOS Deployment Target | 13.0+ |
+| iOS Deployment Target | 15.5+ |
 | Xcode | 14.0+ |
 | CocoaPods | 1.12.0+ |
 
