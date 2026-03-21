@@ -29,18 +29,7 @@
 
 BOOL REFrostedViewControllerUIKitIsFlatMode(void)
 {
-    static BOOL isUIKitFlatMode = NO;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        if (floor(NSFoundationVersionNumber) > 993.0) {
-            // If your app is running in legacy mode, tintColor will be nil - else it must be set to some color.
-            if ([[UIApplication sharedApplication] keyWindow]) {
-                isUIKitFlatMode = [[UIApplication sharedApplication].delegate.window respondsToSelector:@selector(tintColor)];
-            } else {
-                // Possible that we're called early on (e.g. when used in a Storyboard). Adapt and use a temporary window.
-                isUIKitFlatMode = [[UIWindow new] respondsToSelector:@selector(tintColor)];
-            }
-        }
-    });
-    return isUIKitFlatMode;
+    // UIKit has been in flat mode since iOS 7. Since the minimum deployment target
+    // is iOS 13.0+, this is always YES.
+    return YES;
 }
