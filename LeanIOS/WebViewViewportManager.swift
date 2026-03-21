@@ -47,8 +47,8 @@ import WebKit
     }
 
     @objc func setViewport(scale: NSNumber?, width: NSNumber?, webView: WKWebView?) {
-        let appConfig = GoNativeAppConfig.sharedAppConfig()
-        
+        let pinchToZoom = UserDefaults.standard.object(forKey: "pinchToZoom") as? Bool ?? true
+
         var scaleContent = ""
         var widthContent = ""
         var zoom = 0.0
@@ -70,7 +70,7 @@ import WebKit
                     meta.name = 'viewport';
                     document.head.appendChild(meta);
                 }
-                var userScalable = 'user-scalable=\(appConfig.pinchToZoom ? "yes" : "no")';
+                var userScalable = 'user-scalable=\(pinchToZoom ? "yes" : "no")';
                 var scaleContent = '\(scaleContent)';
                 if (scaleContent) {
                     var width = window.screen.width / \(zoom);
