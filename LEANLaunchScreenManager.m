@@ -9,6 +9,7 @@
 #import "LEANLaunchScreenManager.h"
 #import "LEANAppDelegate.h"
 #import "GNBridge.h"
+#import <UIKit/UIKit.h>
 
 @interface LEANLaunchScreenManager()
 @property id<GNController> controller;
@@ -55,12 +56,8 @@
     [self.launchScreen addSubview:centerImageView];
     
     UIWindow *currentWindow = nil;
-    if (@available(iOS 13.0, *)) {
-        UIWindowScene *windowScene = (UIWindowScene *)[[UIApplication sharedApplication].connectedScenes.allObjects firstObject];
-        currentWindow = windowScene.windows.firstObject;
-    } else {
-        currentWindow = [[UIApplication sharedApplication] keyWindow];
-    }
+    UIWindowScene *windowScene = (UIWindowScene *)[[UIApplication sharedApplication].connectedScenes.allObjects firstObject];
+    currentWindow = windowScene.windows.firstObject;
     
     if (!currentWindow) {
         return;

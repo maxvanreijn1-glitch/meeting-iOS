@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Weiyin He. All rights reserved.
 //
 
-#import <MobileCoreServices/MobileCoreServices.h>
+#import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 #import "GonativeIO-Swift.h"
 #import "LEANUtilities.h"
 #import "LEANAppDelegate.h"
@@ -115,10 +115,18 @@
 +(NSString*)utiFromMimetype:(NSString *)mimeType
 {
     if (!mimeType) return nil;
-    CFStringRef MIMEType = (__bridge CFStringRef)mimeType;
-    CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, MIMEType, NULL);
-    NSString *utiString = (__bridge_transfer NSString *)UTI;
-    return utiString;
+    if (@available(iOS 14.0, *)) {
+        UTType *type = [UTType typeWithMIMEType:mimeType];
+        return type.identifier;
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        CFStringRef MIMEType = (__bridge CFStringRef)mimeType;
+        CFStringRef UTI = UTTypeCreatePreferredIdentifierForTag(kUTTagClassMIMEType, MIMEType, NULL);
+        NSString *utiString = (__bridge_transfer NSString *)UTI;
+        return utiString;
+#pragma clang diagnostic pop
+    }
 }
 
 +(BOOL)isValidEmail:(NSString*)email

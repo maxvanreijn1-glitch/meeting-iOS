@@ -1,11 +1,11 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '15.5'
+platform :ios, '13.0'
 
 source 'https://cdn.cocoapods.org/'
 
 require_relative './plugins.rb'
 
-target default_app_target do
+target 'Meetingsmanaged' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
