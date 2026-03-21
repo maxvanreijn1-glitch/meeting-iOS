@@ -247,7 +247,7 @@
     UIButton *button = (UIButton *)sender;
     NSArray *menu = objc_getAssociatedObject(sender, "menu");
     
-    UIView *keyWindow = UIApplication.sharedApplication.currentKeyWindow;
+    UIView *keyWindow = [[UIApplication sharedApplication] keyWindow];
     
     self.menuView = [[CustomMenu alloc] initWithContainer:keyWindow button:button data:menu onTap:^(NSDictionary *data) {
         [self closeMenu];

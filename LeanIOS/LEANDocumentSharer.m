@@ -320,7 +320,7 @@
                 } else if (view) {
                     [self.interactionController presentOpenInMenuFromRect:CGRectZero inView:view animated:YES];
                 } else {
-                    [self.interactionController presentOpenInMenuFromRect:CGRectZero inView:[UIApplication sharedApplication].currentKeyWindow animated:YES];
+                    [self.interactionController presentOpenInMenuFromRect:CGRectZero inView:[[UIApplication sharedApplication] keyWindow] animated:YES];
                 }
                 button.enabled = YES;
                 return [self runCompletion:completion error:nil];
@@ -362,7 +362,7 @@
 }
 
 - (UIViewController *)topMostViewController {
-    UIViewController *vc = [UIApplication sharedApplication].currentKeyWindow.rootViewController;
+    UIViewController *vc = [[UIApplication sharedApplication] keyWindow].rootViewController;
     while (vc.presentedViewController) {
         vc = vc.presentedViewController;
     }

@@ -53,7 +53,7 @@
     centerImageView.translatesAutoresizingMaskIntoConstraints = NO;
     
     [self.launchScreen addSubview:centerImageView];
-    UIWindow *currentWindow = [UIApplication sharedApplication].currentKeyWindow;
+    UIWindow *currentWindow = [[UIApplication sharedApplication] keyWindow];
     [currentWindow addSubview:self.launchScreen];
     
     [NSLayoutConstraint activateConstraints:@[
