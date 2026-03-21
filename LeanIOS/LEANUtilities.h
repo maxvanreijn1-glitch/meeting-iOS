@@ -29,7 +29,10 @@
 +(void)configureWebView:(UIView*)webview;
 +(void)getBodyBackgroundColor:(WKWebView *)webview completion:(void (^)(UIColor *color))completion;
 +(void)applyFontScalingForContentSize:(NSString *)contentSizeCategory toWebView:(WKWebView *)webView asUserScript:(BOOL)asUserScript;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 + (WKProcessPool *)wkProcessPool;
+#pragma clang diagnostic pop
 +(NSArray<NSPredicate*>*)createRegexArrayFromStrings:(id)input;
 +(BOOL)string:(NSString*)string matchesAnyRegex:(NSArray<NSPredicate*>*)regexes;
 +(NSString*)createJsForPostTo:(NSString*)url data:(NSDictionary*)data;

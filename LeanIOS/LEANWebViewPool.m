@@ -183,7 +183,10 @@
         [self.urlsToLoad removeObject:urlString];
         
         WKWebViewConfiguration *config = [[NSClassFromString(@"WKWebViewConfiguration") alloc] init];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
         config.processPool = [LEANUtilities wkProcessPool];
+#pragma clang diagnostic pop
         WKWebView *webview = [[NSClassFromString(@"WKWebView") alloc] initWithFrame:CGRectZero configuration:config];
         [LEANUtilities configureWebView:webview];
         webview.navigationDelegate = self;

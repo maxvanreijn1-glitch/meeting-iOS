@@ -10,7 +10,18 @@ import UIKit
 
 extension UIApplication {
     @objc public var currentKeyWindow: UIWindow? {
-        return UIApplication.shared.windows.last { $0.isKeyWindow }
+        if #available(iOS 15.0, *) {
+            return UIApplication.shared.connectedScenes
+                .compactMap { $0 as? UIWindowScene }
+                .first(where: { $0.activationState == .foregroundActive })?
+                .keyWindow
+                ?? UIApplication.shared.connectedScenes
+                    .compactMap { $0 as? UIWindowScene }
+                    .compactMap { $0.keyWindow }
+                    .first
+        } else {
+            return UIApplication.shared.windows.last { $0.isKeyWindow }
+        }
     }
     
     @objc public var currentStatusBarFrame: CGRect {
