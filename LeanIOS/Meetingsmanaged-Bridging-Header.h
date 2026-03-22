@@ -11,3 +11,6 @@
 #import "LEANRootViewController.h"
 #import "REFrostedViewController.h"
 #import "SSZipArchive.h"
+#import "LEANLoginManager.h"
+#import "LEANSignupManager.h"
+#import "LEANAuthViewController.h"

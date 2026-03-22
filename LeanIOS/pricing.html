@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="description" content="Simple, transparent pricing for Meetings Managed" />
+  <title>Pricing – Meetings Managed</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --color-bg:         #f0f4ff;
+      --color-surface:    #ffffff;
+      --color-primary:    #2563eb;
+      --color-primary-hover: #1d4ed8;
+      --color-text:       #111827;
+      --color-muted:      #6b7280;
+      --color-border:     #e5e7eb;
+      --color-highlight:  #eff6ff;
+      --radius:           16px;
+      --shadow:           0 4px 24px rgba(0,0,0,.07);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-bg:       #0f172a;
+        --color-surface:  #1e293b;
+        --color-text:     #f1f5f9;
+        --color-muted:    #94a3b8;
+        --color-border:   #334155;
+        --color-highlight:#1e3a5f;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
+      padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+    }
+
+    /* ── Header ── */
+    .hero {
+      text-align: center;
+      padding: 56px 24px 32px;
+    }
+    .hero-label {
+      display: inline-block;
+      background: var(--color-highlight);
+      color: var(--color-primary);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      color: var(--color-muted);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto 28px;
+    }
+
+    /* ── Toggle ── */
+    .billing-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-border);
+      border-radius: 40px;
+      padding: 4px 6px;
+      margin-bottom: 40px;
+    }
+    .billing-toggle button {
+      border: none;
+      background: transparent;
+      padding: 7px 18px;
+      border-radius: 30px;
+      font-size: .875rem;
+      font-weight: 500;
+      cursor: pointer;
+      color: var(--color-muted);
+      transition: all .15s;
+    }
+    .billing-toggle button.active {
+      background: var(--color-primary);
+      color: #fff;
+    }
+    .save-badge {
+      font-size: .7rem;
+      background: #dcfce7;
+      color: #15803d;
+      border-radius: 10px;
+      padding: 2px 7px;
+      font-weight: 600;
+    }
+
+    /* ── Cards grid ── */
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    .plan-card {
+      background: var(--color-surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      border: 1.5px solid transparent;
+      position: relative;
+    }
+    .plan-card.popular {
+      border-color: var(--color-primary);
+      box-shadow: 0 8px 40px rgba(37,99,235,.18);
+    }
+
+    .popular-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-primary);
+      color: #fff;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 4px 16px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .plan-name { font-size: 1.1rem; font-weight: 700; }
+    .plan-desc { color: var(--color-muted); font-size: .875rem; line-height: 1.5; }
+
+    .plan-price {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+    }
+    .plan-price .amount {
+      font-size: 2.4rem;
+      font-weight: 800;
+    }
+    .plan-price .period {
+      font-size: .875rem;
+      color: var(--color-muted);
+    }
+
+    .feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: .9rem;
+    }
+    .feature-list li::before {
+      content: '✓';
+      color: #16a34a;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .plan-cta {
+      display: block;
+      text-align: center;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: .95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .15s, color .15s;
+    }
+    .plan-card.popular .plan-cta {
+      background: var(--color-primary);
+      color: #fff;
+    }
+    .plan-card.popular .plan-cta:hover { background: var(--color-primary-hover); }
+    .plan-card:not(.popular) .plan-cta {
+      border: 1.5px solid var(--color-border);
+      color: var(--color-text);
+    }
+    .plan-card:not(.popular) .plan-cta:hover { background: var(--color-highlight); }
+
+    /* ── Footer note ── */
+    .footer-note {
+      text-align: center;
+      color: var(--color-muted);
+      font-size: .875rem;
+      padding: 0 24px 48px;
+    }
+    .footer-note a { color: var(--color-primary); text-decoration: none; }
+
+    /* ── Loading state ── */
+    .loading { text-align: center; padding: 40px; color: var(--color-muted); }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <span class="hero-label">Pricing</span>
+    <h1>Simple, transparent pricing</h1>
+    <p>Start free and scale as your team grows. No hidden fees, cancel anytime.</p>
+
+    <div class="billing-toggle" role="group" aria-label="Billing period">
+      <button id="btnMonthly" class="active" aria-pressed="true">Monthly</button>
+      <button id="btnAnnual" aria-pressed="false">
+        Annual <span class="save-badge">Save 20%</span>
+      </button>
+    </div>
+  </section>
+
+  <div id="plansContainer" class="plans">
+    <div class="loading">Loading plans…</div>
+  </div>
+
+  <p class="footer-note">
+    All plans include a 14-day free trial. No credit card required.
+    <br />
+    Questions? <a href="/contact">Contact our team</a>.
+  </p>
+
+  <script src="auth-bridge.js"></script>
+  <script>
+    (function () {
+      'use strict';
+
+      var isAnnual = false;
+
+      var PLANS = [
+        {
+          id: 'starter',
+          name: 'Starter',
+          desc: 'Perfect for individuals and small teams getting started.',
+          monthly: 0,
+          annual: 0,
+          features: [
+            'Up to 5 meetings / month',
+            'Basic agenda templates',
+            'Email summaries',
+            'Mobile app access',
+          ],
+          popular: false,
+          cta: 'Get Started Free',
+          url: '/signup?plan=starter',
+        },
+        {
+          id: 'pro',
+          name: 'Professional',
+          desc: 'Everything you need to run productive meetings at scale.',
+          monthly: 12,
+          annual: 10,
+          features: [
+            'Unlimited meetings',
+            'Advanced agenda templates',
+            'AI-powered meeting notes',
+            'Calendar integrations',
+            'Action item tracking',
+            'Priority support',
+          ],
+          popular: true,
+          cta: 'Start Free Trial',
+          url: '/signup?plan=pro',
+        },
+        {
+          id: 'enterprise',
+          name: 'Enterprise',
+          desc: 'Custom solutions for large organisations with advanced needs.',
+          monthly: null,
+          annual: null,
+          features: [
+            'Everything in Professional',
+            'SSO & advanced security',
+            'Custom integrations',
+            'Dedicated account manager',
+            'SLA guarantee',
+            'Onboarding & training',
+          ],
+          popular: false,
+          cta: 'Contact Sales',
+          url: '/contact?plan=enterprise',
+        },
+      ];
+
+      function formatPrice(plan) {
+        var price = isAnnual ? plan.annual : plan.monthly;
+        if (price === null) return '<span class="amount">Custom</span>';
+        if (price === 0)    return '<span class="amount">Free</span>';
+        return '<span class="amount">$' + price + '</span><span class="period">/user/mo</span>';
+      }
+
+      function renderPlans() {
+        var container = document.getElementById('plansContainer');
+        container.innerHTML = PLANS.map(function (plan) {
+          return [
+            '<div class="plan-card' + (plan.popular ? ' popular' : '') + '">',
+            plan.popular ? '<span class="popular-badge">Most Popular</span>' : '',
+            '<div class="plan-name">' + plan.name + '</div>',
+            '<p class="plan-desc">' + plan.desc + '</p>',
+            '<div class="plan-price">' + formatPrice(plan) + '</div>',
+            '<ul class="feature-list">',
+            plan.features.map(function (f) { return '<li>' + f + '</li>'; }).join(''),
+            '</ul>',
+            '<a href="' + plan.url + '" class="plan-cta" data-plan-id="' + plan.id + '">' + plan.cta + '</a>',
+            '</div>',
+          ].join('');
+        }).join('');
+
+        // Attach native bridge hooks.
+        container.querySelectorAll('.plan-cta').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            if (typeof AuthBridge !== 'undefined') {
+              AuthBridge.openPricing();
+            }
+          });
+        });
+      }
+
+      // Billing toggle
+      document.getElementById('btnMonthly').addEventListener('click', function () {
+        isAnnual = false;
+        this.classList.add('active');
+        this.setAttribute('aria-pressed', 'true');
+        document.getElementById('btnAnnual').classList.remove('active');
+        document.getElementById('btnAnnual').setAttribute('aria-pressed', 'false');
+        renderPlans();
+      });
+
+      document.getElementById('btnAnnual').addEventListener('click', function () {
+        isAnnual = true;
+        this.classList.add('active');
+        this.setAttribute('aria-pressed', 'true');
+        document.getElementById('btnMonthly').classList.remove('active');
+        document.getElementById('btnMonthly').setAttribute('aria-pressed', 'false');
+        renderPlans();
+      });
+
+      renderPlans();
+    })();
+  </script>
+</body>
+</html>
