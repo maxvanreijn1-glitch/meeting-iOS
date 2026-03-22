@@ -1,14 +1,29 @@
 {
   "name": "gonative-ios",
   "version": "1.0.2",
-  "description": "",
+  "description": "Claude-powered local file integration for iOS projects",
+  "main": "dist/claude-local-file-cli.js",
   "scripts": {
-    "release": "./scripts/release.sh"
+    "release": "./scripts/release.sh",
+    "build": "tsc",
+    "start": "node dist/claude-local-file-cli.js",
+    "dev": "ts-node claude-local-file-cli.ts",
+    "file-ops": "node fileOperations.js",
+    "local-ops": "bash scripts/local-ops.sh",
+    "report": "ruby build/FileIntegration.rb . report"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/gonativeio/gonative-ios.git"
   },
   "author": "GoNative.io LLC",
-  "license": "https://gonative.io/pricing"
+  "license": "https://gonative.io/pricing",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.51.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.37",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.9.3"
+  }
 }

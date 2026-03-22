@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Claude Local File Integration — Analysis Report</title>
+  <style>
+    /* ── Reset & base ────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #0f1117;
+      color: #e2e8f0;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── Layout ──────────────────────────────────────────────────────── */
+    header {
+      background: linear-gradient(135deg, #1a1d2e 0%, #16213e 50%, #0f3460 100%);
+      padding: 2.5rem 2rem 2rem;
+      border-bottom: 1px solid #2d3748;
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #90cdf4;
+      letter-spacing: -0.02em;
+    }
+
+    header p.subtitle {
+      color: #718096;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* ── Cards ───────────────────────────────────────────────────────── */
+    .card {
+      background: #1a1d2e;
+      border: 1px solid #2d3748;
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #90cdf4;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* ── Summary grid ────────────────────────────────────────────────── */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+    }
+
+    .summary-item {
+      background: #0f1117;
+      border: 1px solid #2d3748;
+      border-radius: 0.5rem;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .summary-item .value {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #68d391;
+    }
+
+    .summary-item .label {
+      font-size: 0.75rem;
+      color: #718096;
+      margin-top: 0.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── Language table ──────────────────────────────────────────────── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+
+    th {
+      text-align: left;
+      padding: 0.5rem 0.75rem;
+      color: #718096;
+      font-weight: 600;
+      border-bottom: 1px solid #2d3748;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+    }
+
+    td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid #1e2433;
+    }
+
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #1e2433; }
+
+    .bar-cell { width: 40%; }
+
+    .bar-track {
+      background: #2d3748;
+      border-radius: 9999px;
+      height: 8px;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 9999px;
+      background: linear-gradient(90deg, #4299e1, #68d391);
+      transition: width 0.6s ease;
+    }
+
+    .pct { color: #68d391; font-weight: 600; }
+
+    /* ── File list ────────────────────────────────────────────────────── */
+    .file-list {
+      max-height: 400px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #2d3748 transparent;
+    }
+
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.45rem 0.5rem;
+      border-radius: 0.375rem;
+      font-size: 0.8rem;
+    }
+
+    .file-item:hover { background: #1e2433; }
+
+    .badge {
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 0.15rem 0.45rem;
+      border-radius: 9999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .file-item .path { color: #a0aec0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-item .size { color: #718096; flex-shrink: 0; }
+
+    .lang-oc    { background: #744210; color: #fbd38d; }
+    .lang-swift { background: #7b341e; color: #fed7aa; }
+    .lang-js    { background: #744210; color: #fefcbf; }
+    .lang-ts    { background: #2a4365; color: #90cdf4; }
+    .lang-sh    { background: #1a3a1a; color: #9ae6b4; }
+    .lang-rb    { background: #6b21a8; color: #e9d5ff; }
+    .lang-html  { background: #7c2d12; color: #fed7aa; }
+    .lang-other { background: #2d3748; color: #a0aec0; }
+
+    /* ── Changes section ─────────────────────────────────────────────── */
+    .change-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.4rem 0.5rem;
+      font-size: 0.8rem;
+      border-radius: 0.375rem;
+    }
+
+    .change-item:hover { background: #1e2433; }
+
+    .change-icon { font-size: 1rem; flex-shrink: 0; }
+    .change-type { font-weight: 600; width: 70px; flex-shrink: 0; }
+    .change-path { color: #a0aec0; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .change-time { color: #718096; flex-shrink: 0; font-size: 0.7rem; }
+
+    .change-added    .change-type { color: #68d391; }
+    .change-modified .change-type { color: #f6e05e; }
+    .change-deleted  .change-type { color: #fc8181; }
+
+    /* ── Footer ───────────────────────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      color: #4a5568;
+      font-size: 0.75rem;
+      border-top: 1px solid #1e2433;
+    }
+
+    footer a { color: #4299e1; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      header h1 { font-size: 1.25rem; }
+      .summary-item .value { font-size: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🤖 Claude Local File Integration</h1>
+  <p class="subtitle" id="reportMeta">Analysis Report</p>
+</header>
+
+<main>
+
+  <section class="card">
+    <h2>📊 Project Summary</h2>
+    <div class="summary-grid" id="summaryGrid"></div>
+  </section>
+
+  <section class="card">
+    <h2>🌐 Language Distribution</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Language</th>
+          <th>Files</th>
+          <th>Size (KB)</th>
+          <th class="bar-cell">Distribution</th>
+          <th>%</th>
+        </tr>
+      </thead>
+      <tbody id="languageTableBody"></tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2>📁 File Index</h2>
+    <div class="file-list" id="fileList"></div>
+  </section>
+
+  <section class="card">
+    <h2>🔄 Recent Changes</h2>
+    <div id="changeList"></div>
+  </section>
+
+</main>
+
+<footer>
+  Powered by <a href="https://www.anthropic.com" target="_blank" rel="noopener">Claude AI</a>
+  &middot; Claude Local File Integration System
+  &middot; <span id="footerYear"></span>
+</footer>
+
+<script>
+  // Report data — replaced at runtime by the CLI when generating a live report.
+  // When opened directly in a browser this shows placeholder content.
+  const REPORT_DATA = (typeof window.__REPORT_DATA__ !== 'undefined')
+    ? window.__REPORT_DATA__
+    : {
+        rootPath:    '/path/to/project',
+        generatedAt: new Date().toISOString(),
+        totalFiles:  0,
+        totalBytes:  0,
+        languages:   {},
+        files:       [],
+        changes:     [],
+      };
+
+  // ── Helpers ───────────────────────────────────────────────────────────
+
+  function esc(s) {
+    return String(s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function fmtBytes(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1024 * 1024) return (b / 1024).toFixed(1) + ' KB';
+    return (b / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  function langClass(lang) {
+    const m = {
+      'Objective-C': 'lang-oc', 'Objective-C/C': 'lang-oc',
+      'Swift': 'lang-swift', 'JavaScript': 'lang-js',
+      'TypeScript': 'lang-ts', 'Shell': 'lang-sh',
+      'Ruby': 'lang-rb', 'HTML': 'lang-html',
+    };
+    return m[lang] || 'lang-other';
+  }
+
+  // ── Render ────────────────────────────────────────────────────────────
+
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+  document.getElementById('reportMeta').innerHTML =
+    'Analysis Report &middot; <code>' + esc(REPORT_DATA.rootPath) + '</code>' +
+    ' &middot; Generated ' + new Date(REPORT_DATA.generatedAt).toLocaleString();
+
+  // Summary cards
+  [
+    { label: 'Total Files',  value: REPORT_DATA.totalFiles },
+    { label: 'Total Size',   value: fmtBytes(REPORT_DATA.totalBytes) },
+    { label: 'Languages',    value: Object.keys(REPORT_DATA.languages).length },
+    { label: 'Changes',      value: REPORT_DATA.changes.length },
+  ].forEach(function(item) {
+    var div = document.createElement('div');
+    div.className = 'summary-item';
+    div.innerHTML = '<div class="value">' + esc(String(item.value)) + '</div>' +
+                    '<div class="label">' + esc(item.label) + '</div>';
+    document.getElementById('summaryGrid').appendChild(div);
+  });
+
+  // Language table
+  var langs = Object.entries(REPORT_DATA.languages)
+    .sort(function(a, b) { return b[1].percentage - a[1].percentage; });
+
+  document.getElementById('languageTableBody').innerHTML = langs.map(function(entry) {
+    var lang = entry[0], data = entry[1];
+    var pct = Math.min(data.percentage, 100);
+    return '<tr>' +
+      '<td><strong>' + esc(lang) + '</strong></td>' +
+      '<td>' + data.fileCount + '</td>' +
+      '<td>' + (data.totalBytes / 1024).toFixed(1) + '</td>' +
+      '<td class="bar-cell"><div class="bar-track"><div class="bar-fill" style="width:' + pct + '%"></div></div></td>' +
+      '<td class="pct">' + data.percentage.toFixed(1) + '%</td>' +
+      '</tr>';
+  }).join('');
+
+  // File list
+  var fileListEl = document.getElementById('fileList');
+  if (REPORT_DATA.files.length) {
+    fileListEl.innerHTML = REPORT_DATA.files.map(function(f) {
+      return '<div class="file-item">' +
+        '<span class="badge ' + langClass(f.language) + '">' + esc(f.language) + '</span>' +
+        '<span class="path" title="' + esc(f.relativePath) + '">' + esc(f.relativePath) + '</span>' +
+        '<span class="size">' + fmtBytes(f.size) + '</span>' +
+        '</div>';
+    }).join('');
+  } else {
+    fileListEl.innerHTML = '<p style="color:#718096;padding:0.5rem">No files indexed yet. Run the CLI to generate data.</p>';
+  }
+
+  // Changes
+  var icons = { added: '➕', modified: '📝', deleted: '🗑️' };
+  var changeListEl = document.getElementById('changeList');
+  if (REPORT_DATA.changes.length) {
+    changeListEl.innerHTML = REPORT_DATA.changes.slice(-50).reverse().map(function(c) {
+      return '<div class="change-item change-' + esc(c.changeType) + '">' +
+        '<span class="change-icon">' + (icons[c.changeType] || '🔄') + '</span>' +
+        '<span class="change-type">' + esc(c.changeType) + '</span>' +
+        '<span class="change-path" title="' + esc(c.path) + '">' + esc(c.path) + '</span>' +
+        '<span class="change-time">' + new Date(c.timestamp).toLocaleTimeString() + '</span>' +
+        '</div>';
+    }).join('');
+  } else {
+    changeListEl.innerHTML = '<p style="color:#718096;padding:0.5rem">No changes tracked yet. Start file watching in the CLI.</p>';
+  }
+</script>
+
+</body>
+</html>
